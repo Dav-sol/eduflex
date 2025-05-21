@@ -9,7 +9,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  Api_url = "http://127.0.0.1:8000"
+  private  Api_url = "http://127.0.0.1:8000"
 
   getRecomendaciones(): Observable<any[]>{
     return this.http.get<any[]>(`${this.Api_url}/plan_completo`)
