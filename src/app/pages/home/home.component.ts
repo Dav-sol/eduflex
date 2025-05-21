@@ -1,26 +1,27 @@
 import { Component } from '@angular/core';
 import { EstiloAprendizaje } from './estudiante.model';
-import { ApiService } from '../../services/api.service';
-import { NgForm } from '@angular/forms';
+import { AuthService } from '../../auth.service';
+import { Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
    
-  datos : EstiloAprendizaje | null = null
+  datos: EstiloAprendizaje | null = null
 
-  constructor(private api : ApiService){}
+  constructor(private api : AuthService){}
 
   ObtenerRecomendaciones(){
-    this.api.getRecomendaciones().subscribe({
+    this.api.obtenerCursos().subscribe({
       next: (data) => {
         this.datos = data;
       },
       error: (err) =>{
-        
+        console.error('Error no se pudieron mostrar las recomendaciones', err);
       }
     });
   }

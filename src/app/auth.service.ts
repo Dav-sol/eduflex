@@ -7,7 +7,7 @@ import { tap, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:3000/login'; // Reemplaza con la URL de tu API
+  private apiUrl = 'http://localhost:8000'; // Reemplaza con la URL de tu API
   private tokenKey = 'authToken'; // Clave para almacenar el token en el almacenamiento
 
   constructor(private http: HttpClient) { }
@@ -71,5 +71,9 @@ export class AuthService {
       // Transforma el error para que la aplicación pueda seguir ejecutándose.
       return of(result as T);
     };
+  }
+
+  obtenerCursos(): Observable <any>{
+    return this.http.get<any>(`${this.apiUrl}/plan_completo`)
   }
 }
