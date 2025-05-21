@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { EstiloAprendizaje } from './estudiante.model';
-import { AuthService } from '../../auth.service';
-import { Observable } from 'rxjs';
+import { ApiService } from '../../service/api.service';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-home',
   imports: [CommonModule],
@@ -13,10 +13,10 @@ export class HomeComponent {
    
   datos: EstiloAprendizaje | null = null
 
-  constructor(private api : AuthService){}
+  constructor(private api : ApiService){}
 
   ObtenerRecomendaciones(){
-    this.api.obtenerCursos().subscribe({
+    this.api.obtenerRecursos().subscribe({
       next: (data) => {
         this.datos = data;
       },
