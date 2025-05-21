@@ -1,3 +1,6 @@
+export interface respuestasUser{
+    respuestas: number[];
+}
 export interface Recurso{
     id : string
     title: string

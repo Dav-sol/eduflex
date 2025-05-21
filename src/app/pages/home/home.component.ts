@@ -1,29 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EstiloAprendizaje } from './estudiante.model';
-import { ApiService } from '../../service/api.service';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../../service/api.service';
 @Component({
   selector: 'app-home',
   imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
    
   datos: EstiloAprendizaje | null = null
 
-  constructor(private api : ApiService){}
-
-  ObtenerRecomendaciones(){
-    this.api.obtenerRecursos().subscribe({
-      next: (data) => {
-        this.datos = data;
-      },
-      error: (err) =>{
-        console.error('Error no se pudieron mostrar las recomendaciones', err);
-      }
-    });
+  constructor(private api: ApiService){}
+  
+  ngOnInit(): void {
+    this.api.obtenerRecursos().subscribe(data => {
+      console.log(data)
+    })
   }
+  
 
 }
